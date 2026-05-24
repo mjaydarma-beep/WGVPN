@@ -1,5 +1,7 @@
 # Multisite WireGuard VPN
 
+**Real-world install guide:** [INSTALL.md](INSTALL.md) — hub VPS, site routers, phones, CCTV, firewall, testing.
+
 Hub server: **172.245.110.29** · UDP **51820**  
 Web dashboard: **http://172.245.110.29:10086** (login `admin` / `admin` — change on first login)
 

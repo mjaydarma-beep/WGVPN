@@ -24,6 +24,14 @@
 - `peers-manifest.json` — peer public keys map
 - `server-wg0.conf` — hub config copy
 
+## Documentation
+
+| Doc | Purpose |
+|-----|---------|
+| **[INSTALL.md](INSTALL.md)** | Full real-world installation (production) |
+| [WORKING-SETUP.md](WORKING-SETUP.md) | Your verified IPs and test commands |
+| [test-lab/README.md](test-lab/README.md) | Docker simulator only |
+
 ## Scripts
 
 | Script | Purpose |
