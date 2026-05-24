@@ -4,7 +4,7 @@
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
-$repoName = "VPN_WG"
+$remoteUrl = "https://github.com/mjaydarma-beep/WGVPN.git"
 Write-Host "Checking GitHub login..."
 gh auth status
 if ($LASTEXITCODE -ne 0) {
@@ -13,12 +13,10 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
-if (git remote get-url origin 2>$null) {
-    Write-Host "Remote origin exists. Pushing..."
-    git push -u origin master
-} else {
-    Write-Host "Creating private repo $repoName and pushing..."
-    gh repo create $repoName --private --source=. --remote=origin --push
+if (-not (git remote get-url origin 2>$null)) {
+    git remote add origin $remoteUrl
 }
+Write-Host "Pushing to $remoteUrl ..."
+git push -u origin master
 
 Write-Host "Done. View at: gh repo view --web"
