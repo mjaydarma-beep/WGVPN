@@ -1,0 +1,11 @@
+# Copy to phone.conf after filling keys from WGDashboard (Generate key pair)
+[Interface]
+PrivateKey = YOUR_CLIENT_PRIVATE_KEY
+Address = 10.8.0.50/32
+DNS = 1.1.1.1, 8.8.8.8
+
+[Peer]
+PublicKey = 95UBaxBn3y5grt5agOS40j/OqO9g11I0EcBuSnmFLVo=
+Endpoint = 172.245.110.29:51820
+AllowedIPs = 10.8.0.0/24, 192.168.10.0/24, 192.168.20.0/24
+PersistentKeepalive = 25

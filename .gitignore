@@ -1,0 +1,31 @@
+# WireGuard private keys and live configs — keep local only
+*.conf
+peers-manifest.json
+server-wg0.conf
+client.conf
+
+# Secrets / env
+.env
+.env.*
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# One-off debug scripts (optional local use)
+check_*.py
+dash_logs.py
+fix_*.py
+finish_dashboard.py
+install_dashboard.py
+read_gunicorn.py
+start_dashboard.py
