@@ -99,6 +99,10 @@ python deploy_multisite.py
 
 For a new **site router**, give it a unique `10.8.0.x` address and set `server_allowed` to include its LAN (e.g. `192.168.30.0/24`). Update other peers’ `client_allowed` to include that LAN.
 
+## Test WAN + LAN without real routers
+
+Use the Docker lab in **`test-lab/`** — simulates both site VPN routers and fake CCTV at `192.168.10.100` and `192.168.20.100`. See `test-lab/README.md`.
+
 ## Security
 
 - Change the root password and dashboard admin password.

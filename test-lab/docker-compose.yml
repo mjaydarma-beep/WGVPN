@@ -1,0 +1,76 @@
+# Simulates Site 1 + Site 2 VPN routers and fake CCTV on each LAN.
+# Connects to your real hub at 172.245.110.29 using peers/*.conf
+#
+# Usage: docker compose up -d --build
+# Then import peers/phone.conf on your PC and test pings below.
+
+services:
+  site1-router:
+    build: ./router
+    container_name: wg-site1-router
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      net.ipv4.ip_forward: "1"
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - ../peers/site1-router.conf:/wg/peer.conf:ro
+    environment:
+      LAN_IF: eth1
+      LAN_CIDR: 192.168.10.1/24
+    networks:
+      - wan
+      - site1-lan
+
+  site1-cctv:
+    image: nginx:alpine
+    container_name: wg-site1-cctv
+    networks:
+      site1-lan:
+        ipv4_address: 192.168.10.100
+    volumes:
+      - ./html/site1:/usr/share/nginx/html:ro
+
+  site2-router:
+    build: ./router
+    container_name: wg-site2-router
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      net.ipv4.ip_forward: "1"
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - ../peers/site2-router.conf:/wg/peer.conf:ro
+    environment:
+      LAN_IF: eth1
+      LAN_CIDR: 192.168.20.1/24
+    networks:
+      - wan
+      - site2-lan
+
+  site2-cctv:
+    image: nginx:alpine
+    container_name: wg-site2-cctv
+    networks:
+      site2-lan:
+        ipv4_address: 192.168.20.100
+    volumes:
+      - ./html/site2:/usr/share/nginx/html:ro
+
+networks:
+  wan:
+    driver: bridge
+  site1-lan:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.10.0/24
+  site2-lan:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.20.0/24
