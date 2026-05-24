@@ -3,6 +3,7 @@
 peers-manifest.json
 server-wg0.conf
 client.conf
+backup/
 
 # Secrets / env
 .env

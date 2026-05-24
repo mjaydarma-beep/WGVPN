@@ -8,6 +8,7 @@ services:
   site1-router:
     build: ./router
     container_name: wg-site1-router
+    privileged: true
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -18,11 +19,11 @@ services:
     volumes:
       - ../peers/site1-router.conf:/wg/peer.conf:ro
     environment:
-      LAN_IF: eth1
-      LAN_CIDR: 192.168.10.1/24
+      LAN_IF: eth0
     networks:
-      - wan
-      - site1-lan
+      wan: {}
+      site1-lan:
+        ipv4_address: 192.168.10.2
 
   site1-cctv:
     image: nginx:alpine
@@ -36,6 +37,7 @@ services:
   site2-router:
     build: ./router
     container_name: wg-site2-router
+    privileged: true
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -46,11 +48,11 @@ services:
     volumes:
       - ../peers/site2-router.conf:/wg/peer.conf:ro
     environment:
-      LAN_IF: eth1
-      LAN_CIDR: 192.168.20.1/24
+      LAN_IF: eth0
     networks:
-      - wan
-      - site2-lan
+      wan: {}
+      site2-lan:
+        ipv4_address: 192.168.20.2
 
   site2-cctv:
     image: nginx:alpine
